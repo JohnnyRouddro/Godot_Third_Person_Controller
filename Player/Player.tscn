@@ -1,0 +1,469 @@
+[gd_scene load_steps=42 format=2]
+
+[ext_resource path="res://Player/Godot_Chan_Stealth.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Player/Camera.gd" type="Script" id=2]
+[ext_resource path="res://Player/Player.gd" type="Script" id=3]
+[ext_resource path="res://Animations/walk_right-loop.tres" type="Animation" id=4]
+[ext_resource path="res://Animations/walk_left-loop.tres" type="Animation" id=5]
+[ext_resource path="res://Animations/idle-loop.tres" type="Animation" id=6]
+[ext_resource path="res://Animations/walk_forward-loop.tres" type="Animation" id=7]
+[ext_resource path="res://Animations/walk_forward_left-loop.tres" type="Animation" id=8]
+[ext_resource path="res://Animations/walk_forward_right-loop.tres" type="Animation" id=9]
+[ext_resource path="res://Animations/roll.tres" type="Animation" id=10]
+[ext_resource path="res://Animations/run_forward-loop.tres" type="Animation" id=11]
+[ext_resource path="res://Animations/walk_back_left-loop.tres" type="Animation" id=12]
+[ext_resource path="res://Animations/walk_back_right-loop.tres" type="Animation" id=13]
+[ext_resource path="res://Animations/walk_backward-loop.tres" type="Animation" id=14]
+[ext_resource path="res://ui/circle.png" type="Texture" id=15]
+[ext_resource path="res://ui/direction.png" type="Texture" id=16]
+[ext_resource path="res://ui/velocity.png" type="Texture" id=17]
+[ext_resource path="res://Player/Status.gd" type="Script" id=18]
+
+[sub_resource type="CylinderShape" id=1]
+radius = 0.42385
+height = 1.56537
+
+[sub_resource type="AnimationNodeAnimation" id=2]
+animation = "walk_forward-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=3]
+animation = "run_forward-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=4]
+animation = "roll"
+
+[sub_resource type="AnimationNodeAnimation" id=5]
+animation = "idle-loop"
+
+[sub_resource type="AnimationNodeTimeScale" id=6]
+
+[sub_resource type="AnimationNodeTransition" id=7]
+input_count = 2
+xfade_time = 0.1
+input_0/name = "aiming"
+input_0/auto_advance = false
+input_1/name = "not_aiming"
+input_1/auto_advance = false
+
+[sub_resource type="AnimationNodeBlend3" id=8]
+
+[sub_resource type="AnimationNodeOneShot" id=9]
+
+[sub_resource type="AnimationNodeTimeScale" id=10]
+
+[sub_resource type="AnimationNodeTimeScale" id=11]
+
+[sub_resource type="AnimationNodeAnimation" id=12]
+animation = "idle-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=13]
+animation = "walk_forward-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=14]
+animation = "walk_backward-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=15]
+animation = "walk_right-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=16]
+animation = "walk_left-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=17]
+animation = "walk_forward_right-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=18]
+animation = "walk_back_right-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=19]
+animation = "walk_forward_left-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=20]
+animation = "walk_back_left-loop"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=21]
+blend_point_0/node = SubResource( 12 )
+blend_point_0/pos = Vector2( 0, 0 )
+blend_point_1/node = SubResource( 13 )
+blend_point_1/pos = Vector2( 0, 1 )
+blend_point_2/node = SubResource( 14 )
+blend_point_2/pos = Vector2( 0, -1 )
+blend_point_3/node = SubResource( 15 )
+blend_point_3/pos = Vector2( 1, 0 )
+blend_point_4/node = SubResource( 16 )
+blend_point_4/pos = Vector2( -1, 0 )
+blend_point_5/node = SubResource( 17 )
+blend_point_5/pos = Vector2( 1, 1 )
+blend_point_6/node = SubResource( 18 )
+blend_point_6/pos = Vector2( 1, -1 )
+blend_point_7/node = SubResource( 19 )
+blend_point_7/pos = Vector2( -1, 1 )
+blend_point_8/node = SubResource( 20 )
+blend_point_8/pos = Vector2( -1, -1 )
+
+[sub_resource type="AnimationNodeTimeScale" id=22]
+
+[sub_resource type="AnimationNodeBlendTree" id=23]
+graph_offset = Vector2( -311, 398 )
+nodes/Animation/node = SubResource( 5 )
+nodes/Animation/position = Vector2( 100, 300 )
+"nodes/Animation 2/node" = SubResource( 2 )
+"nodes/Animation 2/position" = Vector2( -180, 400 )
+"nodes/Animation 3/node" = SubResource( 3 )
+"nodes/Animation 3/position" = Vector2( -160, 520 )
+"nodes/Animation 4/node" = SubResource( 4 )
+"nodes/Animation 4/position" = Vector2( 340, 540 )
+nodes/TimeScale/node = SubResource( 6 )
+nodes/TimeScale/position = Vector2( 260, 180 )
+nodes/aim_transition/node = SubResource( 7 )
+nodes/aim_transition/position = Vector2( 440, 260 )
+nodes/iwr_blend/node = SubResource( 8 )
+nodes/iwr_blend/position = Vector2( 280, 360 )
+nodes/output/position = Vector2( 880, 360 )
+nodes/roll/node = SubResource( 9 )
+nodes/roll/position = Vector2( 660, 360 )
+nodes/roll_scale/node = SubResource( 10 )
+nodes/roll_scale/position = Vector2( 500, 500 )
+nodes/run_scale/node = SubResource( 11 )
+nodes/run_scale/position = Vector2( 100, 520 )
+nodes/strafe/node = SubResource( 21 )
+nodes/strafe/position = Vector2( 0, 120 )
+nodes/walk_scale/node = SubResource( 22 )
+nodes/walk_scale/position = Vector2( 100, 400 )
+node_connections = [ "output", 0, "roll", "roll", 0, "aim_transition", "roll", 1, "roll_scale", "run_scale", 0, "Animation 3", "TimeScale", 0, "strafe", "aim_transition", 0, "TimeScale", "aim_transition", 1, "iwr_blend", "iwr_blend", 0, "Animation", "iwr_blend", 1, "walk_scale", "iwr_blend", 2, "run_scale", "roll_scale", 0, "Animation 4", "walk_scale", 0, "Animation 2" ]
+
+[node name="Player" type="KinematicBody"]
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_horizontal_guides_": [  ]
+}
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.766839, 0 )
+visible = false
+shape = SubResource( 1 )
+
+[node name="Mesh" type="Spatial" parent="."]
+
+[node name="Godot_Chan_Stealth" parent="Mesh" instance=ExtResource( 1 )]
+
+[node name="Camroot" type="Spatial" parent="."]
+script = ExtResource( 2 )
+
+[node name="h" type="Spatial" parent="Camroot"]
+
+[node name="v" type="Spatial" parent="Camroot/h"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.41498, 0 )
+
+[node name="Camera" type="ClippedCamera" parent="Camroot/h/v"]
+transform = Transform( -1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, -4.03244e-07, 0, -2.67056 )
+process_mode = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Mesh/Godot_Chan_Stealth")
+anims/idle-loop = ExtResource( 6 )
+anims/roll = ExtResource( 10 )
+anims/run_forward-loop = ExtResource( 11 )
+anims/walk_back_left-loop = ExtResource( 12 )
+anims/walk_back_right-loop = ExtResource( 13 )
+anims/walk_backward-loop = ExtResource( 14 )
+anims/walk_forward-loop = ExtResource( 7 )
+anims/walk_forward_left-loop = ExtResource( 8 )
+anims/walk_forward_right-loop = ExtResource( 9 )
+anims/walk_left-loop = ExtResource( 5 )
+anims/walk_right-loop = ExtResource( 4 )
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 23 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/TimeScale/scale = 1.5
+parameters/aim_transition/current = 0
+parameters/iwr_blend/blend_amount = -1.0
+parameters/roll/active = false
+parameters/roll_scale/scale = 1.0
+parameters/run_scale/scale = 1.0
+parameters/strafe/blend_position = Vector2( -0.00126106, 0 )
+parameters/walk_scale/scale = 1.5
+
+[node name="roll_window" type="Timer" parent="."]
+process_mode = 0
+wait_time = 0.5
+one_shot = true
+__meta__ = {
+"_editor_description_": "This Timer ensures \"Tap to roll\"
+Releasing key within this time executes roll"
+}
+
+[node name="roll_timer" type="Timer" parent="."]
+process_mode = 0
+wait_time = 0.2
+one_shot = true
+
+[node name="Status" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 18 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="W" type="ColorRect" parent="Status"]
+margin_left = 553.978
+margin_top = 100.933
+margin_right = 605.978
+margin_bottom = 154.933
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Status/W"]
+margin_left = 18.0
+margin_top = 19.5
+margin_right = 58.0
+margin_bottom = 33.5
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "W"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="A" type="ColorRect" parent="Status"]
+margin_left = 490.978
+margin_top = 164.433
+margin_right = 542.978
+margin_bottom = 218.433
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Status/A"]
+margin_left = 18.0
+margin_top = 19.5
+margin_right = 58.0
+margin_bottom = 33.5
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "A"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="S" type="ColorRect" parent="Status"]
+margin_left = 553.978
+margin_top = 164.433
+margin_right = 605.978
+margin_bottom = 218.433
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Status/S"]
+margin_left = 21.5
+margin_top = 19.5
+margin_right = 61.5
+margin_bottom = 33.5
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "S"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="D" type="ColorRect" parent="Status"]
+margin_left = 616.478
+margin_top = 164.433
+margin_right = 668.478
+margin_bottom = 218.433
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Status/D"]
+margin_left = 18.0
+margin_top = 19.5
+margin_right = 58.0
+margin_bottom = 33.5
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "D"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Space" type="ColorRect" parent="Status"]
+margin_left = 719.978
+margin_top = 164.933
+margin_right = 847.978
+margin_bottom = 218.933
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Status/Space"]
+margin_left = 44.4583
+margin_top = 19.5
+margin_right = 84.4583
+margin_bottom = 33.5
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Space"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Aim" type="ColorRect" parent="Status"]
+margin_left = 914.115
+margin_top = 164.52
+margin_right = 982.115
+margin_bottom = 218.52
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Status/Aim"]
+margin_left = 21.0987
+margin_top = 19.5
+margin_right = 61.0987
+margin_bottom = 33.5
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Aim"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control" type="Control" parent="Status"]
+margin_left = 192.847
+margin_top = 162.692
+margin_right = 232.847
+margin_bottom = 202.692
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="circle" type="Sprite" parent="Status/Control"]
+scale = Vector2( 0.287369, 0.287369 )
+texture = ExtResource( 15 )
+
+[node name="direction" type="Sprite" parent="Status/Control"]
+scale = Vector2( 0.287369, 0.475846 )
+texture = ExtResource( 16 )
+offset = Vector2( 112, 0 )
+
+[node name="mesh" type="Sprite" parent="Status/Control"]
+modulate = Color( 1, 0.345098, 0.345098, 1 )
+scale = Vector2( 0.287369, 0.287369 )
+texture = ExtResource( 16 )
+offset = Vector2( 112, 0 )
+
+[node name="velocity" type="Sprite" parent="Status/Control"]
+scale = Vector2( 0.287369, 0.287369 )
+texture = ExtResource( 17 )
+
+[node name="ColorRect" type="ColorRect" parent="Status"]
+margin_left = 144.901
+margin_top = 266.811
+margin_right = 268.901
+margin_bottom = 325.811
+color = Color( 0.0980392, 0.231373, 0.407843, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="Status/ColorRect"]
+margin_left = 11.9219
+margin_top = 7.41742
+margin_right = 17.9219
+margin_bottom = 13.4174
+color = Color( 0, 0.74902, 0.952941, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Status/ColorRect/ColorRect"]
+margin_left = 10.3943
+margin_top = -1.73239
+margin_right = 61.3943
+margin_bottom = 12.2676
+text = "Velocity"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect2" type="ColorRect" parent="Status/ColorRect"]
+margin_left = 11.9219
+margin_top = 24.4366
+margin_right = 17.9219
+margin_bottom = 30.4366
+color = Color( 1, 0.345098, 0.345098, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Status/ColorRect/ColorRect2"]
+margin_left = 10.3943
+margin_top = -1.73239
+margin_right = 61.3943
+margin_bottom = 12.2676
+text = "Mesh Rotation"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect3" type="ColorRect" parent="Status/ColorRect"]
+margin_left = 11.9219
+margin_top = 42.5159
+margin_right = 17.9219
+margin_bottom = 48.5159
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Status/ColorRect/ColorRect3"]
+margin_left = 10.3943
+margin_top = -1.73239
+margin_right = 61.3943
+margin_bottom = 12.2676
+text = "Direction"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Status"]
+margin_left = 500.618
+margin_top = 234.989
+margin_right = 540.618
+margin_bottom = 248.989
+rect_scale = Vector2( 1.40679, 1.40679 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="Status"]
+margin_left = 500.618
+margin_top = 263.497
+margin_right = 540.618
+margin_bottom = 277.497
+rect_scale = Vector2( 1.40679, 1.40679 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label3" type="Label" parent="Status"]
+margin_left = 500.618
+margin_top = 291.052
+margin_right = 540.618
+margin_bottom = 305.052
+rect_scale = Vector2( 1.40679, 1.40679 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label4" type="Label" parent="Status"]
+margin_left = 500.618
+margin_top = 319.561
+margin_right = 540.618
+margin_bottom = 333.561
+rect_scale = Vector2( 1.40679, 1.40679 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
