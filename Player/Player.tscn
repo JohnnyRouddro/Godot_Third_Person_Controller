@@ -129,7 +129,7 @@ nodes/strafe/node = SubResource( 21 )
 nodes/strafe/position = Vector2( 0, 120 )
 nodes/walk_scale/node = SubResource( 22 )
 nodes/walk_scale/position = Vector2( 100, 400 )
-node_connections = [ "output", 0, "roll", "roll", 0, "aim_transition", "roll", 1, "roll_scale", "run_scale", 0, "Animation 3", "TimeScale", 0, "strafe", "aim_transition", 0, "TimeScale", "aim_transition", 1, "iwr_blend", "iwr_blend", 0, "Animation", "iwr_blend", 1, "walk_scale", "iwr_blend", 2, "run_scale", "roll_scale", 0, "Animation 4", "walk_scale", 0, "Animation 2" ]
+node_connections = [ "output", 0, "roll", "TimeScale", 0, "strafe", "aim_transition", 0, "TimeScale", "aim_transition", 1, "iwr_blend", "iwr_blend", 0, "Animation", "iwr_blend", 1, "walk_scale", "iwr_blend", 2, "run_scale", "roll_scale", 0, "Animation 4", "run_scale", 0, "Animation 3", "walk_scale", 0, "Animation 2", "roll", 0, "aim_transition", "roll", 1, "roll_scale" ]
 
 [node name="Player" type="KinematicBody"]
 script = ExtResource( 3 )
@@ -156,6 +156,18 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.41498, 0 )
 
 [node name="Camera" type="ClippedCamera" parent="Camroot/h/v"]
 transform = Transform( -1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, -4.03244e-07, 0, -2.67056 )
+current = true
+process_mode = 1
+
+[node name="mouse_control_stay_delay" type="Timer" parent="Camroot"]
+one_shot = true
+
+[node name="CamFollow" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.57079, 0 )
+visible = false
+
+[node name="Camera" type="ClippedCamera" parent="CamFollow"]
+transform = Transform( -1, 0, 8.9407e-08, 0, 1, 0, -8.9407e-08, 0, -1, 0, 0, -1.98246 )
 process_mode = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
